@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ControleRural.Areas.Cadastramento.Models.AnimalVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Novo Animal", "Cadastrar")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeAnimal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroBrinco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sexo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Raca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aptidao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SisBov)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SisBovPai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SisBovMae)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NirfNascimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NirfAtual)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeAnimal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroBrinco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sexo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Raca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categoria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aptidao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SisBov)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SisBovPai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SisBovMae)
+        </td>
+        <td>
+           @item.DataNascimento.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NirfNascimento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NirfAtual)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id=@item.NumeroBrinco}) 
+        </td>
+    </tr>
+}
+
+</table>
