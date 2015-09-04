@@ -20,5 +20,7 @@ namespace ControleRural.Models
         public string Fax { get; set; }
         public string Responsavel { get; set; }
         public DateTime Aquisicao { get; set; }
+        public string IdUsuario { get; set; }
+
     }
 }

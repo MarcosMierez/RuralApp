@@ -5,11 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using ControleRural.Aplicacao;
 using ControleRural.Areas.Cadastramento.Models;
+using ControleRural.Helpers;
 
 namespace ControleRural.Areas.Cadastramento.Controllers
 {
     public class PessoaController : Controller
     {
+        [Authorize(Roles = "Adiministrador")]
         public ActionResult Index()
         {
             return View(Construtor.PessoaApp().GetAll().ToList());
@@ -24,8 +26,8 @@ namespace ControleRural.Areas.Cadastramento.Controllers
         {
             if (!ModelState.IsValid)
             {
-                Construtor.PessoaApp().Save(pessoa);
-                return RedirectToAction("Index");
+                Construtor.PessoaApp().Save(pessoa,Seguranca.Usuario().ID);
+                return RedirectToAction("Index","Painel");
             }
             return View(pessoa);
         }

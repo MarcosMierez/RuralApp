@@ -7,7 +7,7 @@ using ControleRural.Repositorio;
 
 namespace ControleRural.Aplicacao
 {
-    public class PessoaAplicacao:ICrud<PessoaVM>
+    public class PessoaAplicacao
     {
         private readonly PessoaRepositorio pRepo;
 
@@ -16,9 +16,9 @@ namespace ControleRural.Aplicacao
             pRepo = repo;
         }
 
-        public void Save(PessoaVM entidade)
+        public void Save(PessoaVM entidade,string id)
         {
-            pRepo.Save(entidade);
+            pRepo.Save(entidade,id);
         }
 
         public PessoaVM GetById(string id)

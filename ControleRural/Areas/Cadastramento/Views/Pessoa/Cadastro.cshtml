@@ -19,28 +19,45 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PessoaJf, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PessoaJf, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PessoaJf, "", new { @class = "text-danger" })
+            <label class="control-label col-md-2">Pessoa</label>
+            <div class="col-md-10" ng-init="tab = 1">
+                <a>Fisica</a>
+                <input type="radio" value="f" name="PessoaJf" id="PessoaJf" ng-click="tab = 1" checked=""/>
+                <a>Juridica</a>
+                <input type="radio" value="j" name="PessoaJf" id="PessoaJf" ng-click="tab = 2" />
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cnpj, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group" ng-show="tab===2">
+            @Html.LabelFor(model => model.Cnpj, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Cnpj, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Cnpj, "", new { @class = "text-danger" })
+                <input type="number" id="Cnpj" name="Cnpj" placeholder="" class="form-control"/>
+                @Html.ValidationMessageFor(model => model.Cnpj, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group" ng-show="tab===2">
+            @Html.LabelFor(model => model.InscEstadual, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" id="InscEstadual" name="InscEstadual" placeholder="Inscrição Estadual" class="form-control" />
+                @Html.ValidationMessageFor(model => model.InscEstadual, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cpf, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group" ng-show="tab===1">
+            @Html.LabelFor(model => model.Cpf, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Cpf, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Cpf, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Cpf, "", new {@class = "text-danger"})
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -90,13 +107,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.InscEstadual, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.InscEstadual, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.InscEstadual, "", new { @class = "text-danger" })
-            </div>
-        </div>
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -114,17 +125,10 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Registrar Fornecedor" class="btn btn-success" />
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@ namespace ControleRural.Models
     {
         public string NomeAnimal { get; set; }
         public string NumeroBrinco { get; set; }
-        public bool Sexo { get; set; }
+        public string Sexo { get; set; }
         public string Raca { get; set; }
         public string Categoria { get; set; }
         public string  Aptidao { get; set; }
@@ -20,5 +20,8 @@ namespace ControleRural.Models
         public DateTime DataNascimento { get; set; }
         public int NirfNascimento { get; set; }
         public int NirfAtual { get; set; }
+        public string IdUsuario { get; set; }
+        public string Vacinas { get; set; }
+
     }
 }

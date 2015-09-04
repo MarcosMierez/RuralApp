@@ -32,7 +32,30 @@ namespace ControleRural.Repositorio
                     nA = animalMd.NirfAtual
                 });
         }
-
+        public void Save(AnimalVM entidade,string IdUsuario)
+        {
+            var animalMd = retornaMd(entidade);
+            bd.SqlBd.Query(
+                "insert into animal (NumeroBrinco,NomeAnimal,Sexo,Raca,Categoria,Aptidao,SisBov,SisBovPai,SisBovMae,DataNascimento,NirfNascimento,NirfAtual,IdUsuario,Vacinas) " +
+                "values(@id,@nome,@sx,@raca,@ct,@ap,@sb,@sbP,@sbM,@dN,@nN,@nA,@uId,@vac)", new
+                {
+                    id = animalMd.NumeroBrinco,
+                    nome = animalMd.NomeAnimal,
+                    sx = animalMd.Sexo,
+                    raca = animalMd.Raca,
+                    ct = animalMd.Categoria,
+                    ap = animalMd.Aptidao,
+                    sb = animalMd.SisBov,
+                    sbP = animalMd.SisBovPai,
+                    sbM = animalMd.SisBovMae,
+                    dN = animalMd.DataNascimento,
+                    nN = animalMd.NirfNascimento,
+                    nA = animalMd.NirfAtual,
+                    uId=IdUsuario,
+                    vac="vacinas"
+                    
+                });
+        }
         public AnimalVM GetById(string id)
         {
             return retornaVM(bd.SqlBd.Query<Animal>(
@@ -57,7 +80,7 @@ namespace ControleRural.Repositorio
         public void Update(AnimalVM entidade)
         {
             var animal = retornaMd(entidade);
-            bd.SqlBd.Query("update animal set NumeroBrinco = @nB," +
+            bd.SqlBd.Query("update animal set NumeroBrinco = @nB, " +
                            "NomeAnimal = @nA ," +
                            "Sexo = @sx ," +
                            "Raca = @raca ," +
@@ -68,7 +91,8 @@ namespace ControleRural.Repositorio
                            "SisBovMae = @sM ," +
                            "DataNascimento = @dN ," +
                            "NirfNascimento = @nN , " +
-                           "NirfAtual = @nfA where NumeroBrinco = @nB",
+                           "NirfAtual = @nfA, " +
+                           "Vacinas  = @vac where NumeroBrinco = @nB and IdUsuario = @id ",
                 new
                 {
                     nB = animal.NumeroBrinco,
@@ -82,10 +106,24 @@ namespace ControleRural.Repositorio
                     sM = animal.SisBovMae,
                     dN = animal.DataNascimento,
                     nN = animal.NirfNascimento,
-                    nfA = animal.NirfAtual
+                    nfA = animal.NirfAtual,
+                    id = animal.IdUsuario,
+                    vac=animal.Vacinas
                 });
         }
-
+        private static string carregaVacinas(List<string> vacinas)
+        {
+            if (!vacinas.Any())
+            {
+                return "";
+            }
+            var tempPermissao = "";
+            foreach (var permissao in vacinas)
+            {
+                tempPermissao += permissao + ",";
+            }
+            return tempPermissao.Remove(tempPermissao.Length - 1);
+        }
         private Animal retornaMd(AnimalVM animal)
         {
             return new Animal()
@@ -101,7 +139,9 @@ namespace ControleRural.Repositorio
                 Sexo = animal.Sexo,
                 SisBov = animal.SisBov,
                 SisBovMae = animal.SisBovMae,
-                SisBovPai = animal.SisBovPai
+                SisBovPai = animal.SisBovPai,
+                IdUsuario = animal.IdUsuario,
+                Vacinas = carregaVacinas(animal.Vacinas)
             };
         }
         private AnimalVM retornaVM(Animal animal)
@@ -119,7 +159,8 @@ namespace ControleRural.Repositorio
                 Sexo = animal.Sexo,
                 SisBov = animal.SisBov,
                 SisBovMae = animal.SisBovMae,
-                SisBovPai = animal.SisBovPai
+                SisBovPai = animal.SisBovPai,
+                IdUsuario = animal.IdUsuario
             };
         }
     }

@@ -13,14 +13,14 @@ namespace ControleRural.Repositorio
         private Contexto bd=new Contexto();
         public void Save(PessoaVM entidade)
         {
-           var md = retornaMd(entidade);
+            var md = retornaMd(entidade);
             bd.SqlBd.Query(
                 "insert into pessoa (id,nome,apelido,pessoajf,cpf,cnpj,endereco,numero,bairro,cep,cidade,inscestadual,telefone,fax,email) " +
                 "values(@id,@nome,@apelido,@pjf,@cpf,@cnpj,@end,@num,@bai,@cep,@cid,@ins,@tel,@fax,@email)",
                 new
                 {
                     id = md.Id,
-                    nome=md.Nome,
+                    nome = md.Nome,
                     apelido = md.Apelido,
                     pjf = md.PessoaJf,
                     cpf = md.Cpf,
@@ -34,6 +34,32 @@ namespace ControleRural.Repositorio
                     tel = md.Telefone,
                     fax = md.Fax,
                     email = md.Email
+                });
+        }
+        public void Save(PessoaVM entidade,string id)
+        {
+           var md = retornaMd(entidade);
+            bd.SqlBd.Query(
+                "insert into pessoa (id,nome,apelido,pessoajf,cpf,cnpj,endereco,numero,bairro,cep,cidade,inscestadual,telefone,fax,email,UsuarioId) " +
+                "values(@id,@nome,@apelido,@pjf,@cpf,@cnpj,@end,@num,@bai,@cep,@cid,@ins,@tel,@fax,@email,@uId)",
+                new
+                {
+                    id = md.Id,
+                    nome = md.Nome,
+                    apelido = md.Apelido,
+                    pjf = md.PessoaJf,
+                    cpf = md.Cpf,
+                    cnpj = md.Cnpj,
+                    end = md.Endereco,
+                    num = md.Numero,
+                    bai = md.Bairro,
+                    cep = md.Cep,
+                    cid = md.Cidade,
+                    ins = md.InscEstadual,
+                    tel = md.Telefone,
+                    fax = md.Fax,
+                    email = md.Email,
+                    uId = id
                 });
         }
 
@@ -112,7 +138,8 @@ namespace ControleRural.Repositorio
                 Id = pessoa.Id,
                 InscEstadual = pessoa.InscEstadual,
                 Numero = pessoa.Numero,
-                Telefone = pessoa.Telefone
+                Telefone = pessoa.Telefone,
+                IdUsuario = pessoa.IdUsuario
             };
         }
         private Pessoa retornaMd(PessoaVM pessoa)
@@ -133,7 +160,8 @@ namespace ControleRural.Repositorio
                 Id = pessoa.Id,
                 InscEstadual = pessoa.InscEstadual,
                 Numero = pessoa.Numero,
-                Telefone = pessoa.Telefone
+                Telefone = pessoa.Telefone,
+                IdUsuario = pessoa.IdUsuario
             };
         }
     }

@@ -5,12 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using ControleRural.Aplicacao;
 using ControleRural.Areas.Cadastramento.Models;
+using ControleRural.Helpers;
 
 namespace ControleRural.Areas.Cadastramento.Controllers
 {
     public class AnimalController : Controller
     {
-       
+       [Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             return View(Construtor.AnimalApp().GetAll());
@@ -25,8 +26,8 @@ namespace ControleRural.Areas.Cadastramento.Controllers
         {
             if (ModelState.IsValid)
             {
-                Construtor.AnimalApp().Save(animal);
-                return RedirectToAction("Index");
+                Construtor.AnimalApp().Save(animal,Seguranca.Usuario().ID);
+                return RedirectToActionPermanent("Index","Painel",new{Areas=""});
             }
             return View(animal);
         }

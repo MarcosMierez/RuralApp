@@ -25,15 +25,13 @@ namespace ControleRural.Aplicacao
         {
             return repo.GetById(id);
         }
-
-        public void Save(AnimalVM animal)
-        {
-            repo.Save(animal);
-        }
-
         public void Update(AnimalVM animal)
         {
             repo.Update(animal);
+        }
+        public void Save(AnimalVM animal, string IdUsuario)
+        {
+            repo.Save(animal,IdUsuario);
         }
     }
 }

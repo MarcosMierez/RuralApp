@@ -3,7 +3,7 @@
 <h2>Registro de Animal</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     <div class="form-horizontal">
         <hr />
@@ -23,29 +23,67 @@
                 @Html.ValidationMessageFor(model => model.NumeroBrinco, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Sexo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Sexo</label>
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Sexo)
-                    @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
-                </div>
+                <select class="form-control" name="Sexo">
+                    <option value="m">Masculino</option>
+                    <option value="f">Feminino</option>
+                </select>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Raca, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Raca, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Raca, "", new { @class = "text-danger" })
+            <label class="control-label col-md-2">Raca</label>
+            <div style="padding-left: 210px;" ng-init="tab = 1">
+                <a ng-click="tab = 1" href="#">Corte</a>
+                <a ng-click="tab = 2" href="#">Zebuina</a>
+                <a ng-click="tab = 3" href="#">Leiteira</a>
             </div>
+            <div class="col-md-10">
+                <select ng-show="tab===1" name="Raca" class="form-control">
+                    <option value="Hereford">Hereford</option>
+                    <option value="Aberdeen">Aberdeen Angus</option>
+                    <option value="Charoles">Charolês</option>
+                    <option value="Shorthorn">Shorthorn</option>
+                    <option value="Galloway">Galloway</option>
+                    <option value="Hereford">Hereford</option>
+                </select>
+            </div>
+            <div class="col-md-10">
+                <select ng-show="tab===2" name="Raca" class="form-control">
+                    <option value="Nelore">Nelore</option>
+                    <option value="Nelore-Mocho">Nelore-Mocho</option>
+                    <option value="Nelore-Malhado">Nelore-Malhado </option>
+                    <option value="Nelore-Vermelho">Nelore-Vermelho</option>
+                    <option value="Gir">Gir</option>
+                    <option value="Gir-Mocho">Gir-Mocho</option>
+                </select>
+            </div>
+            <div class="col-md-10">
+                <select ng-show="tab===3" name="Raca" class="form-control">
+                    <option value="Holandesa-PB">Holandesa-PB</option>
+                    <option value="Holandesa-VB">Holandesa-VB</option>
+                    <option value="Guernsey">Guernsey</option>
+                    <option value="Jersey">Jersey</option>
+                    <option value="Ayrshire">Ayrshire</option>
+                    <option value="Outros">Outros</option>
+                </select>
+            </div>
+
+
+
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Categoria, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Categoria, new { htmlAttributes = new { @class = "form-control" } })
+                <select class="form-control" name="Categoria">
+                    <option value="bovino">Bovino</option>
+                    <option value="bubalino">Bubalino</option>
+                    <option value="suino">Suíno</option>
+                    <option value="outros">Outros</option>
+                </select>
                 @Html.ValidationMessageFor(model => model.Categoria, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -53,8 +91,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Aptidao, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Aptidao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Aptidao, "", new { @class = "text-danger" })
+                <select name="Aptidao" class="form-control">
+                    <option value="Abate">Abate</option>
+                    <option value="Engorda">Engorda</option>
+                    <option value="Reprodução">Reprodução</option>
+                    <option value="Exposição">Exposição</option>
+                    <option value="Leilão">Leilão</option>
+                    <option value="Esporte">Esporte</option>
+                    <option value="outros">Outros</option>
+                </select>
             </div>
         </div>
 
@@ -85,7 +130,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="date" name="DataNascimento" id="DataNascimento"  class="form-control"/>
                 @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -114,9 +159,6 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

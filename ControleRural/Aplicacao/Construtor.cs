@@ -26,5 +26,10 @@ namespace ControleRural.Aplicacao
         {
             return new VacinaAplicacao(new VacinaRepositorio());
         }
+
+        public static UsuarioAplicacao UsuarioApp()
+        {
+            return new UsuarioAplicacao(new UsuarioRepositorio());
+        }
     }
 }

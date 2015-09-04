@@ -11,13 +11,15 @@ namespace ControleRural.Areas.Cadastramento.Models
         public int Id { get; set; }
         [Required]
         public int NumeroLote { get; set; }
-         [Required]
+        [Required]
         public DateTime DataCompra { get; set; }
-         [Required]
+        [Required]
         public string TipoVacina { get; set; }
-         [Required]
+        [Required]
         public DateTime Vencimento { get; set; }
-         [Required]
+        [Required]
         public int Quantidade { get; set; }
+        public string IdUsuario { get; set; }
+
     }
 }

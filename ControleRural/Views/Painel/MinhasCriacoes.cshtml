@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ControleRural.Areas.Cadastramento.Models.AnimalVM>
+
+
+<h2>Criações</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nome
+        </th>
+        <th>
+           Numero do Brinco
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sexo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Raca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aptidao)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeAnimal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroBrinco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sexo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Raca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aptidao)
+        </td>
+        <td>
+            <a href="@Url.Action("Detalhe","Painel",new{id = @item.NumeroBrinco})">Editar</a>
+        </td>
+    </tr>
+}
+
+</table>
