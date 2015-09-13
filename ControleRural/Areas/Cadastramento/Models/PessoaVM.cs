@@ -9,14 +9,12 @@ namespace ControleRural.Areas.Cadastramento.Models
 {
     public class PessoaVM
     {
-        [Required]
         public string Id { get; set; }
         public string Apelido { get; set; }
         public string PessoaJf { get; set; }
-        [RegularExpression(@"/^d{2}.d{3}.d{3}/d{4}-d{2}$")]
-        public int Cnpj { get; set; }
+        public string Cnpj { get; set; }
         [RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$",ErrorMessage = "O campo cpf deve ter a seguinte formatacao 000.000.000-00")]
-        public int Cpf { get; set; }
+        public string Cpf { get; set; }
         [Required]
         public string Nome { get; set; }
         [Required]

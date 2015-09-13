@@ -50,5 +50,7 @@ namespace ControleRural.Areas.Cadastramento.Models
 
         public string IdUsuario { get; set; }
         public List<string> Vacinas { get; set; }
+        public string PhotoPath { get; set; }
+        public HttpPostedFileBase Photo { get; set; }
     }
 }

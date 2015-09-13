@@ -13,6 +13,7 @@ namespace ControleRural.Models
         public string TipoVacina { get; set; }
         public DateTime Vencimento { get; set; }
         public int Quantidade { get; set; }
+        public string Observacao { get; set; }
         public string IdUsuario { get; set; }
 
     }

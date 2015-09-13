@@ -1,20 +1,81 @@
-﻿@model ControleRural.Areas.Cadastramento.Models.AnimalVM
+﻿@using System.Web.Razor.Generator
+@model ControleRural.Areas.Cadastramento.Models.AnimalVM
 
 <h2>Registro de Animal</h2>
 
 
-@using (Html.BeginForm())
-{
+
+<form action="" method="post" enctype="multipart/form-data">
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(model => model.NomeAnimal, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <label class="control-label col-md-2">Foto</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NomeAnimal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NomeAnimal, "", new { @class = "text-danger" })
+                <a class="btn btn-success" ng-click="pt = true">Escolher Foto</a>
+
+                <div ng-show="pt===true" style="padding-top: 10px">
+                    @if (Model.PhotoPath == null)
+                    {
+                    <img src="~/Content/Padrao/Boi.jpg" height="200" class="img-rounded" />
+                    }
+                    else
+                    {
+                    <img src="~/Content/Uploads/@Model.Categoria/@Model.PhotoPath" height="200" class="img-rounded" />
+                    }
+                    <input type="file" name="Photo" id="Photo" class="input" style="padding-top: 10px" />
+                    <p class="help-block">Favor selecione uma foto</p>
+                </div>
+
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeAnimal, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NomeAnimal, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.NomeAnimal, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Raca</label>
+
+            <div style="padding-left: 210px;" ng-init="tab = 1">
+                <a ng-click="tab = 1" href="#">Corte</a>
+                <a ng-click="tab = 2" href="#">Zebuina</a>
+                <a ng-click="tab = 3" href="#">Leiteira</a>
+            </div>
+            <div>
+                <div class="col-md-10">
+                    <select name="Raca" class="form-control">
+                        <option selected="" class="success">@Model.Raca</option>
+                        <option value="Nelore" ng-show="tab===2">Nelore</option>
+                        <option value="Nelore-Mocho" ng-show="tab===2">Nelore-Mocho</option>
+                        <option value="Nelore-Malhado" ng-show="tab===2">Nelore-Malhado </option>
+                        <option value="Nelore-Vermelho" ng-show="tab===2">Nelore-Vermelho</option>
+                        <option value="Gir" ng-show="tab===2">Gir</option>
+                        <option value="Gir-Mocho" ng-show="tab===2">Gir-Mocho</option>
+
+                        <option value="Holandesa-PB" ng-show="tab===3">Holandesa-PB</option>
+                        <option value="Holandesa-VB" ng-show="tab===3">Holandesa-VB</option>
+                        <option value="Guernsey" ng-show="tab===3">Guernsey</option>
+                        <option value="Jersey" ng-show="tab===3">Jersey</option>
+                        <option value="Ayrshire" ng-show="tab===3">Ayrshire</option>
+
+
+                        <option value="Hereford" ng-show="tab===1">Hereford</option>
+                        <option value="Aberdeen-Angus" ng-show="tab===1">Aberdeen-Angus</option>
+                        <option value="Charoles" ng-show="tab===1">Charolês</option>
+                        <option value="Shorthorn" ng-show="tab===1">Shorthorn</option>
+                        <option value="Galloway" ng-show="tab===1">Galloway</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
         <div class="form-group">
             <label class="col-md-2 control-label">Vacinas</label>
             <div class="col-md-10">
@@ -22,62 +83,53 @@
                 <div ng-show="tab=== true">
                     <div class="checkbox">
                         <label>Brucelose</label>
-                        <input type="checkbox" value="Brucelose" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Brucelose"))
-                                                                                                 {
-                                                                                                     <text> checked</text>
-                                                                                                 }/>
+                        <input type="checkbox" value="Brucelose" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Brucelose")) { <text> checked</text>
+                                                                                             } />
                     </div>
                     <div class="checkbox">
                         <label>Tuberculose</label>
-                        <input type="checkbox" value="Tuberculose" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Tuberculose"))
-                                                                                                   { <text> checked</text>
-                                                                                                 } />
+                        <input type="checkbox" value="Tuberculose" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Tuberculose")) { <text> checked</text>
+                                                                                               } />
 
                     </div>
                     <div class="checkbox">
                         <label>Febre Aftosa</label>
-                        <input type="checkbox" value="Febre-Aftosa" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Febre-Aftosa"))
-                                                                                                    { <text> checked</text>
-                                                                                                 } />
+                        <input type="checkbox" value="Febre-Aftosa" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Febre-Aftosa")) { <text> checked</text>
+                                                                                                } />
 
                     </div>
                     <div class="checkbox">
                         <label>Raiva Bovina</label>
-                        <input type="checkbox" value="Raiva-Bovina" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Raiva-Bovina"))
-                                                                                                    { <text> checked</text>
-                                                                                                 } />
+                        <input type="checkbox" value="Raiva-Bovina" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Raiva-Bovina")) { <text> checked</text>
+                                                                                                } />
 
                     </div>
                     <div class="checkbox">
                         <label>Clostridiose</label>
-                        <input type="checkbox" value="Clostridiose" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Clostridiose"))
-                                                                                                    { <text> checked</text>
-                                                                                                 } />
+                        <input type="checkbox" value="Clostridiose" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Clostridiose")) { <text> checked</text>
+                                                                                                } />
 
                     </div>
                     <div class="checkbox">
                         <label>Botulismo</label>
-                        <input type="checkbox" value="Botulismo" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Botulismo"))
-                                                                                                 { <text> checked</text>
-                                                                                                 } />
+                        <input type="checkbox" value="Botulismo" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Botulismo")) { <text> checked</text>
+                                                                                             } />
 
                     </div>
                     <div class="checkbox">
                         <label>Salmonelose</label>
-                        <input type="checkbox" value="Salmonelose" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Salmonelose"))
-                                                                                                   { <text> checked</text>
-                                                                                                 } />
+                        <input type="checkbox" value="Salmonelose" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Salmonelose")) { <text> checked</text>
+                                                                                               } />
 
                     </div>
                     <div class="checkbox">
                         <label>Pasteurelose</label>
-                        <input type="checkbox" value="Pasteurelose" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Pasteurelose"))
-                                                                                                    { <text> checked</text>
-                                                                                                 } />
+                        <input type="checkbox" value="Pasteurelose" id="Vacinas[]" name="Vacinas[]" @if (Model.Vacinas.Contains("Pasteurelose")) { <text> checked</text>
+                                                                                                } />
 
                     </div>
                     <a href="" class="btn btn-success" ng-click="tab = false" ng-hide="tab===false">Adicionar Vacinas</a>
-                    
+
                 </div>
 
             </div>
@@ -93,71 +145,43 @@
             <label class="control-label col-md-2">Sexo</label>
             <div class="col-md-10">
                 <select class="form-control" name="Sexo">
-                    <option value="m">Masculino</option>
+                    @{
+                        if (Model.Sexo == "m")
+                        {
+                    <option value="m" selected="">Masculino</option>
                     <option value="f">Feminino</option>
+                        }
+                        else
+                        {
+                    <option value="f" selected="">Feminino</option>
+                    <option value="m">Masculino</option>
+
+                        }
+                    }
+
+
                 </select>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Raca</label>
-            <div style="padding-left: 210px;" ng-init="tab = 1">
-                <a ng-click="tab = 1" href="#">Corte</a>
-                <a ng-click="tab = 2" href="#">Zebuina</a>
-                <a ng-click="tab = 3" href="#">Leiteira</a>
-            </div>
-            <div class="col-md-10">
-                <select ng-show="tab===1" name="Raca" class="form-control">
-                    <option value="Hereford">Hereford</option>
-                    <option value="Aberdeen">Aberdeen Angus</option>
-                    <option value="Charoles">Charolês</option>
-                    <option value="Shorthorn">Shorthorn</option>
-                    <option value="Galloway">Galloway</option>
-                    <option value="Hereford">Hereford</option>
-                </select>
-            </div>
-            <div class="col-md-10">
-                <select ng-show="tab===2" name="Raca" class="form-control">
-                    <option value="Nelore">Nelore</option>
-                    <option value="Nelore-Mocho">Nelore-Mocho</option>
-                    <option value="Nelore-Malhado">Nelore-Malhado </option>
-                    <option value="Nelore-Vermelho">Nelore-Vermelho</option>
-                    <option value="Gir">Gir</option>
-                    <option value="Gir-Mocho">Gir-Mocho</option>
-                </select>
-            </div>
-            <div class="col-md-10">
-                <select ng-show="tab===3" name="Raca" class="form-control">
-                    <option value="Holandesa-PB">Holandesa-PB</option>
-                    <option value="Holandesa-VB">Holandesa-VB</option>
-                    <option value="Guernsey">Guernsey</option>
-                    <option value="Jersey">Jersey</option>
-                    <option value="Ayrshire">Ayrshire</option>
-                    <option value="Outros">Outros</option>
-                </select>
-            </div>
-
-
-
-        </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Categoria, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select class="form-control" name="Categoria" >
+                <select class="form-control" name="Categoria">
+                    <option value="@Model.Categoria" selected="">@Model.Categoria.ToUpperInvariant()</option>
                     <option value="bovino">Bovino</option>
                     <option value="bubalino">Bubalino</option>
                     <option value="suino">Suíno</option>
                     <option value="outros">Outros</option>
                 </select>
                 @Html.ValidationMessageFor(model => model.Categoria, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Categoria, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Aptidao, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select name="Aptidao" class="form-control">
+                    <option selected="">@Model.Aptidao</option>
                     <option value="Abate">Abate</option>
                     <option value="Engorda">Engorda</option>
                     <option value="Reprodução">Reprodução</option>
@@ -223,7 +247,7 @@
             </div>
         </div>
     </div>
-}
+</form>
 
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ControleRural.Areas.Cadastramento.Models.VacinaVM>
+
+<h2>Estoque de Vacinas</h2>
+
+<p>
+    @Html.ActionLink("Registrar Nova Vacina", "RegistrarVacina","Painel")
+</p>
+<table class="table">
+    <tr>
+        <th>
+          Número do Lote
+        </th>
+        <th>
+           Data de Aquisição
+        </th>
+        <th>
+           Tipo
+        </th>
+        <th>
+           Validade
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroLote)
+        </td>
+        <td>
+            @item.DataCompra.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoVacina)
+        </td>
+        <td>
+          @item.Vencimento.ToString("dd/MM/yyyy")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantidade)
+        </td>
+        <td>
+            <a href="@Url.Action("EditarVacina","Painel",new{id=@item.Id})" class="btn btn-success">Editar</a>
+        </td>
+    </tr>
+}
+
+</table>

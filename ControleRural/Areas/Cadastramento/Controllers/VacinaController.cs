@@ -12,7 +12,7 @@ namespace ControleRural.Areas.Cadastramento.Controllers
     {
         public ActionResult Index()
         {
-            return View(Construtor.VacinaApp().GetAll());
+            return View();
         }
 
         public ActionResult Cadastrar()
@@ -24,7 +24,7 @@ namespace ControleRural.Areas.Cadastramento.Controllers
         {
             if (ModelState.IsValid)
             {
-                Construtor.VacinaApp().Save(vacina);
+
                 return RedirectToAction("Index");
             }
             return View(vacina);
@@ -32,14 +32,7 @@ namespace ControleRural.Areas.Cadastramento.Controllers
 
         public ActionResult Editar(string id)
         {
-            if (id != null)
-            {
-                var tempV = Construtor.VacinaApp().GetById(id);
-                if (tempV.NumeroLote != null)
-                {
-                    return View(tempV);
-                }
-            }
+
             return RedirectToAction("Index");
         }
         [HttpPost]

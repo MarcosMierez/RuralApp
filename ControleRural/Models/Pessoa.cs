@@ -11,8 +11,8 @@ namespace ControleRural.Models
         public string Id { get; set; }
         public string Apelido { get; set; }
         public string PessoaJf { get; set; }
-        public int Cnpj { get; set; }
-        public int  Cpf { get; set; }
+        public string Cnpj { get; set; }
+        public string  Cpf { get; set; }
         public string Nome { get; set; }
         public string Endereco { get; set; }
         public int Numero { get; set; }

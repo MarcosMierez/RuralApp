@@ -15,4 +15,16 @@ select,
 textarea {
     max-width: 280px;
 }
-
+#options li a {
+    color: #203e92;
+    font-size: 14px;
+}
+#options li a:hover {
+    color: #d0d4de;
+    background-color: #203e92;
+}
+.headers {
+    text-align: center;
+    font-size: 20px;
+    font-family: segoe ui;
+}

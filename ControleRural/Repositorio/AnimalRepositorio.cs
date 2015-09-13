@@ -92,7 +92,8 @@ namespace ControleRural.Repositorio
                            "DataNascimento = @dN ," +
                            "NirfNascimento = @nN , " +
                            "NirfAtual = @nfA, " +
-                           "Vacinas  = @vac where NumeroBrinco = @nB and IdUsuario = @id ",
+                           "Vacinas  = @vac , " +
+                           "Photo = @pt   where NumeroBrinco = @nB and IdUsuario = @id ",
                 new
                 {
                     nB = animal.NumeroBrinco,
@@ -108,7 +109,8 @@ namespace ControleRural.Repositorio
                     nN = animal.NirfNascimento,
                     nfA = animal.NirfAtual,
                     id = animal.IdUsuario,
-                    vac=animal.Vacinas
+                    vac=animal.Vacinas,
+                    pt=animal.Photo
                 });
         }
         private static string carregaVacinas(List<string> vacinas)
@@ -141,7 +143,8 @@ namespace ControleRural.Repositorio
                 SisBovMae = animal.SisBovMae,
                 SisBovPai = animal.SisBovPai,
                 IdUsuario = animal.IdUsuario,
-                Vacinas = carregaVacinas(animal.Vacinas)
+                Vacinas = carregaVacinas(animal.Vacinas),
+                Photo = animal.PhotoPath
             };
         }
         private AnimalVM retornaVM(Animal animal)
@@ -160,7 +163,8 @@ namespace ControleRural.Repositorio
                 SisBov = animal.SisBov,
                 SisBovMae = animal.SisBovMae,
                 SisBovPai = animal.SisBovPai,
-                IdUsuario = animal.IdUsuario
+                IdUsuario = animal.IdUsuario,
+                PhotoPath = animal.Photo
             };
         }
     }

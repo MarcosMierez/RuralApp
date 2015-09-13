@@ -22,6 +22,7 @@ namespace ControleRural.Models
         public int NirfAtual { get; set; }
         public string IdUsuario { get; set; }
         public string Vacinas { get; set; }
+        public string Photo { get; set; }
 
     }
 }

@@ -20,6 +20,7 @@ namespace ControleRural.Areas.Cadastramento.Models
         [Required]
         public int Quantidade { get; set; }
         public string IdUsuario { get; set; }
+        public string Observacao { get; set; }
 
     }
 }

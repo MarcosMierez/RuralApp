@@ -1,9 +1,9 @@
-﻿<h2>Painel de Controle</h2>
+﻿<h2 class="headers">Painel de Controle</h2>
 <p>Bem vindo @User.Identity.Name</p>
 
 <ul class="list-group">
     <li class="list-group-item"><a href="@Url.Action("RegistrarAnimal","Painel")">Registrar Animal</a></li>
-    <li class="list-group-item"><a href="@Url.Action("Cadastro","Pessoa",new {area="Cadastramento"})">Registrar Fornecedor</a></li>
-    <li class="list-group-item"><a>Registrar Propriedade</a></li>
-    <li class="list-group-item"><a href="@Url.Action("MinhasCriacoes","Painel")">Criações</a></li>
+    <li class="list-group-item"><a href="@Url.Action("RegistrarFornecedor","Painel")">Registrar Fornecedor</a></li>
+    <li class="list-group-item"><a href="@Url.Action("RegistrarPropriedade","Painel")">Registrar Propriedade</a></li>
+    <li class="list-group-item"><a href="@Url.Action("MinhasCriacoes","Painel")">Registro de Compras e Vendas</a></li>
 </ul>

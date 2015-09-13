@@ -124,6 +124,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Padrao\Boi.jpg" />
+    <Content Include="Content\Uploads\bovino\96704b0d-c6ab-4189-85ce-a8aa9b718f2f.jpg" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -181,7 +183,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ImagemHelper.cs" />
     <Compile Include="Helpers\Seguranca.cs" />
+    <Compile Include="Helpers\UploadPhoto.cs" />
     <Compile Include="Models\Animal.cs" />
     <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\Propriedade.cs" />
@@ -213,6 +217,12 @@
     <Content Include="Views\Painel\MinhasCriacoes.cshtml" />
     <Content Include="Views\Painel\Detalhe.cshtml" />
     <Content Include="Views\Painel\RegistrarAnimal.cshtml" />
+    <Content Include="Views\Painel\RegistrarPropriedade.cshtml" />
+    <Content Include="Views\Painel\RegistrarFornecedor.cshtml" />
+    <Content Include="Views\Painel\Relatorios.cshtml" />
+    <Content Include="Views\Painel\RegistrarVacina.cshtml" />
+    <Content Include="Views\Painel\EstoqueVacinas.cshtml" />
+    <Content Include="Views\Painel\EditarVacina.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

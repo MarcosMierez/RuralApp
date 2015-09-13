@@ -21,9 +21,9 @@ namespace ControleRural.Aplicacao
         {
             return pRepo.ListarTodos();
         } 
-        public void Salvar(PropriedadeViewModel propriedade)
+        public void Salvar(PropriedadeViewModel propriedade, string id)
         {
-            pRepo.Salvar(propriedade);
+            pRepo.Salvar(propriedade,id);
         }
 
         public PropriedadeViewModel ListarId(string id)

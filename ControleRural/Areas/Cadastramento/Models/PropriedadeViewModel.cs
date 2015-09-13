@@ -40,7 +40,7 @@ namespace ControleRural.Areas.Cadastramento.Models
         public string Responsavel { get; set; }
         [Required]
         public DateTime Aquisicao { get; set; }
-        public string IdUsuario { get; set; }
+        public string UsuarioId { get; set; }
 
 
     }

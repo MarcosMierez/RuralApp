@@ -12,12 +12,12 @@ namespace ControleRural.Repositorio
     public class PropriedadeRepositorio
     {
         private Contexto bd = new Contexto();
-        public void Salvar(PropriedadeViewModel propriedade)
+        public void Salvar(PropriedadeViewModel propriedade,string usuarioId)
         {
             var propModel = retornaPropriedade(propriedade);
             bd.SqlBd.Query(
-                "insert into propriedade (id,nomepropriedade,endereco,numero,complemento,bairro,cidade,cep,telefone,fax,responsavel,aquisicao) " +
-                "values (@id,@nome,@endereco,@numero,@complemento,@bairro,@cidade,@cep,@telefone,@fax,@responsavel,@aquisicao)",
+                "insert into propriedade (id,nomepropriedade,endereco,numero,complemento,bairro,cidade,cep,telefone,fax,responsavel,aquisicao,UsuarioId) " +
+                "values (@id,@nome,@endereco,@numero,@complemento,@bairro,@cidade,@cep,@telefone,@fax,@responsavel,@aquisicao,@uId)",
                 new
                 {
                     id = propModel.Id,
@@ -31,7 +31,8 @@ namespace ControleRural.Repositorio
                     telefone = propModel.Telefone,
                     fax = propModel.Fax,
                     responsavel = propModel.Responsavel,
-                    aquisicao = propModel.Aquisicao
+                    aquisicao = propModel.Aquisicao,
+                    uId=usuarioId
 
                 });
         }
@@ -102,7 +103,8 @@ namespace ControleRural.Repositorio
                 NomePropriedade = propriedade.NomePropriedade,
                 Numero = propriedade.Numero,
                 Responsavel = propriedade.Responsavel,
-                Telefone = propriedade.Telefone
+                Telefone = propriedade.Telefone,
+                UsuarioId = propriedade.UsuarioId
             };
         }
         private PropriedadeViewModel retornaPropriedadeViewModel(Propriedade propriedade)
@@ -120,7 +122,8 @@ namespace ControleRural.Repositorio
                 NomePropriedade = propriedade.NomePropriedade,
                 Numero = propriedade.Numero,
                 Responsavel = propriedade.Responsavel,
-                Telefone = propriedade.Telefone
+                Telefone = propriedade.Telefone,
+                UsuarioId = propriedade.UsuarioId
             };
         }
     }

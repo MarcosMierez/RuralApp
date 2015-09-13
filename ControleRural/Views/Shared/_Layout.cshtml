@@ -3,36 +3,50 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Controle Agropecuário</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <div class="nav nav-tabs navbar-fixed-top" style="background-color: #828af2; padding-top: 50px;padding-right: 10px">
+        <div class="">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")" style="color: #1c720f">Controle Agropecuario</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
+            <ul class="nav navbar-nav navbar-right" id="options">
+                @{
+                    if (!@User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="@Url.Action("Login", "Home")">Entrar</a></li>
+                        <li><a href="@Url.Action("RegistrarUsuario", "Home")">Registrar-se</a></li>
+                    }
+                    else
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name <span class="glyphicon glyphicon-user"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Dados Pessoais</a></li>
+                                <li><a href="#">Sair</a></li>
+                            </ul>
+                        </li>
+                    }
+}
+            </ul>
         </div>
-    </div>
 
+    </div>
+    <hr />
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
     </div>
+    <footer style="position:absolute;
+	bottom:0;
+	width:100%">
+        <p style="text-align: center">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/angular.min.js"></script>

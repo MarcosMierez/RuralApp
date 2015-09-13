@@ -17,19 +17,19 @@ namespace ControleRural.Aplicacao
             repo = vrepo;
         }
 
-        public IEnumerable<VacinaVM> GetAll()
+        public IEnumerable<VacinaVM> GetAll(string usuarioId)
         {
-            return repo.GetAll();
+            return repo.GetAll(usuarioId);
         }
 
-        public void Save(VacinaVM vacina)
+        public void Save(VacinaVM vacina, string id)
         {
-            repo.Save(vacina);
+            repo.Save(vacina,id);
         }
 
-        public VacinaVM GetById(string Id)
+        public VacinaVM GetById(string Id,string usuarioId)
         {
-            return repo.GetById(Id);
+            return repo.GetById(Id,usuarioId);
         }
 
         public void Update(VacinaVM vacina)

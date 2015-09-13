@@ -23,11 +23,7 @@ namespace ControleRural.Areas.Cadastramento.Controllers
         [HttpPost]
         public ActionResult RegistrarPropriedade(PropriedadeViewModel propriedade)
         {
-            if (ModelState.IsValid)
-            {
-                Construtor.PropriedadeApp().Salvar(propriedade);
-            }
-            return View(propriedade);
+            return View();
         }
 
         public ActionResult Editar(string id)
