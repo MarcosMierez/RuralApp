@@ -18,9 +18,35 @@ namespace ControleRural.Controllers
         {
             return View();
         }
+
+        public ActionResult RegistrarCompra()
+        {
+            @ViewBag.criacoes = Construtor.UsuarioApp().MinhasCriacoes(usuario.ID,"","","");
+            return View(new RegistroAnimal());
+        }
+
+        [HttpPost]
+        public ActionResult RegistrarCompra(RegistroAnimal registro)
+        {
+            if (ModelState.IsValid)
+            {
+                registro.UsuarioId = usuario.ID;
+                Construtor.UsuarioApp().RegistrarAtividade(registro);
+                return RedirectToAction("Index");
+            }
+            @ViewBag.criacoes = Construtor.UsuarioApp().MinhasCriacoes(usuario.ID, "", "", "");
+            return View(registro);
+        }
+
+
         public ActionResult MinhasCriacoes()
         {
-            return View(Construtor.UsuarioApp().MinhasCriacoes(usuario.ID));
+            return View(Construtor.UsuarioApp().MinhasCriacoes(usuario.ID,"","",""));
+        }
+        [HttpPost]
+        public ActionResult MinhasCriacoes(string filtro,string busca,string filtroRefinado)
+        {
+            return View(Construtor.UsuarioApp().MinhasCriacoes(usuario.ID,filtro,busca,filtroRefinado));
         }
         public ActionResult Detalhe(string id)
         {
@@ -28,11 +54,15 @@ namespace ControleRural.Controllers
             {
                 return RedirectToAction("MinhasCriacoes");
             }
+            var propriedades = Construtor.UsuarioApp().MinhasPropriedades(usuario.ID);
+            ViewBag.propriedades = new SelectList(propriedades, "id", "nomepropriedade");
             return View(Construtor.UsuarioApp().EditarAnimal(id, usuario.ID));
         }
         [HttpPost]
         public ActionResult Detalhe(AnimalVM animal)
         {
+            var propriedades = Construtor.UsuarioApp().MinhasPropriedades(usuario.ID);
+            ViewBag.propriedades = new SelectList(propriedades, "id", "nomepropriedade");
             var animalModel = Construtor.UsuarioApp().EditarAnimal(animal.NumeroBrinco, usuario.ID);
             animal.PhotoPath = animalModel.PhotoPath;
             if (ModelState.IsValid && animalModel != null)
@@ -49,6 +79,8 @@ namespace ControleRural.Controllers
         }
         public ActionResult RegistrarAnimal()
         {
+            var propriedades = Construtor.UsuarioApp().MinhasPropriedades(usuario.ID);
+            ViewBag.propriedades = new SelectList(propriedades, "id", "nomepropriedade");
             return View(new AnimalVM());
         }
         [HttpPost]
@@ -59,6 +91,8 @@ namespace ControleRural.Controllers
                 Construtor.AnimalApp().Save(animal, usuario.ID);
                 return RedirectToAction("Index");
             }
+            var propriedades = Construtor.UsuarioApp().MinhasPropriedades(usuario.ID);
+            ViewBag.propriedades = new SelectList(propriedades, "id", "nomepropriedade");
             return View(animal);
         }
         public ActionResult RegistrarPropriedade()
@@ -87,12 +121,11 @@ namespace ControleRural.Controllers
             if (ModelState.IsValid)
             {
                 pessoa.IdUsuario = usuario.ID;
-                Construtor.PessoaApp().Save(pessoa,usuario.ID);
+                Construtor.PessoaApp().Save(pessoa, usuario.ID);
                 return RedirectToAction("Index");
             }
             return View(pessoa);
         }
-
         public ActionResult RegistrarVacina()
         {
             return View(new VacinaVM());
@@ -103,7 +136,7 @@ namespace ControleRural.Controllers
             if (ModelState.IsValid)
             {
                 vacina.IdUsuario = usuario.ID;
-                Construtor.VacinaApp().Save(vacina,usuario.ID);
+                Construtor.VacinaApp().Save(vacina, usuario.ID);
                 return RedirectToAction("EstoqueVacinas");
             }
             return View(vacina);
@@ -112,17 +145,12 @@ namespace ControleRural.Controllers
         {
             return View();
         }
-        public ActionResult EstoqueVacinas()
-        {
-            return View(Construtor.VacinaApp().GetAll(usuario.ID).ToList());
-        }
-
         public ActionResult EditarVacina(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("EstoqueVacinas");
-                
+
             }
             var tempVacina = Construtor.VacinaApp().GetById(id, usuario.ID);
             if (tempVacina.IdUsuario == usuario.ID)
@@ -131,16 +159,29 @@ namespace ControleRural.Controllers
             }
             return RedirectToAction("EstoqueVacinas");
         }
-
         [HttpPost]
         public ActionResult EditarVacina(VacinaVM vacina)
         {
-            if (ModelState.IsValid && vacina.IdUsuario==usuario.ID )
+            if (ModelState.IsValid && vacina.IdUsuario == usuario.ID)
             {
                 Construtor.VacinaApp().Update(vacina);
                 return RedirectToAction("EstoqueVacinas");
             }
             return View(vacina);
+        }
+        public ActionResult EstoqueVacinas()
+        {
+            return View(Construtor.VacinaApp().GetAll(usuario.ID).ToList());
+        }
+
+        public ActionResult Fornecedores()
+        {
+            return View(Construtor.PessoaApp().GetAll(usuario.ID));
+        }
+
+        public ActionResult DetalheFornecedor(string id)
+        {
+            return View(Construtor.PessoaApp().GetById(id, usuario.ID));
         }
     }
 }

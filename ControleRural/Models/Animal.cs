@@ -20,7 +20,9 @@ namespace ControleRural.Models
         public DateTime DataNascimento { get; set; }
         public int NirfNascimento { get; set; }
         public int NirfAtual { get; set; }
+        public DateTime Aquisicao { get; set; }
         public string IdUsuario { get; set; }
+        public int PropriedadeId { get; set; }
         public string Vacinas { get; set; }
         public string Photo { get; set; }
 

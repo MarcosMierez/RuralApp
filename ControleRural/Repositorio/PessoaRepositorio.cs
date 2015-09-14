@@ -63,19 +63,20 @@ namespace ControleRural.Repositorio
                 });
         }
 
-        public PessoaVM GetById(string id)
+        public PessoaVM GetById(string id,string usuarioId)
         {
             return
                 retornaVm(
                     bd.SqlBd.Query<Pessoa>(
-                        "select id,apelido,pessoajf,cpf,cnpj,nome,numero,endereco,bairro,cep,cidade,inscestadual,telefone,fax,email from pessoa where id = @idP",
-                        new {idP = id}).FirstOrDefault());
+                        "select id,apelido,pessoajf,cpf,cnpj,nome,numero,endereco,bairro,cep,cidade,inscestadual,telefone,fax,email from pessoa where id = @idP and UsuarioId = @uId ",
+                        new {idP = id,uId =usuarioId}).FirstOrDefault());
         }
 
-        public IEnumerable<PessoaVM> GetAll()
+        public IEnumerable<PessoaVM> GetAll(string usuarioId)
         {
-         var pessoaBd=bd.SqlBd.Query<Pessoa>(
-                "select id,apelido,pessoajf,cpf,cnpj,nome,numero,endereco,bairro,cep,cidade,inscestadual,telefone,fax,email from pessoa")
+            var pessoaBd = bd.SqlBd.Query<Pessoa>(
+                "select id,apelido,pessoajf,cpf,cnpj,nome,numero,endereco,bairro,cep,cidade,inscestadual,telefone,fax,email,UsuarioId as IdUsuario from pessoa where UsuarioId = @uId",
+                new {uId = usuarioId})
                 .ToList();
             var pessoasVM = new List<PessoaVM>();
             foreach (var p  in pessoaBd)
@@ -163,6 +164,18 @@ namespace ControleRural.Repositorio
                 Telefone = pessoa.Telefone,
                 IdUsuario = pessoa.IdUsuario
             };
+        }
+
+
+        public IEnumerable<PessoaVM> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public PessoaVM GetById(string id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

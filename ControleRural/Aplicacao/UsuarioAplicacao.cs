@@ -43,12 +43,35 @@ namespace ControleRural.Aplicacao
             _uRepositorio.Save(usuario);
         }
 
-        public IEnumerable<AnimalVM> MinhasCriacoes(string usuarioId)
+        public IEnumerable<AnimalVM> MinhasCriacoes(string usuarioId, string filtro, string busca, string filtroRefinado)
         {
-            return _contexto.SqlBd.Query<AnimalVM>(
-                 "select NumeroBrinco,NomeAnimal,Sexo,Raca,Aptidao,IdUsuario from animal where IdUsuario = @id",
+            var animalVmList = new List<AnimalVM>();
+            const string query = "select NumeroBrinco,NomeAnimal,Sexo,Raca,Aptidao,IdUsuario,PropriedadeId,Aquisicao from animal where IdUsuario = @id ";
+            if (string.IsNullOrEmpty(filtro) && string.IsNullOrEmpty(busca) && string.IsNullOrEmpty(filtroRefinado))
+            {
+                 animalVmList = _contexto.SqlBd.Query<AnimalVM>(query + " order by Aquisicao desc",
                  new { id = usuarioId })
                  .ToList();
+            }
+            else if (!string.IsNullOrEmpty(busca) && !string.IsNullOrEmpty(filtroRefinado))
+
+            {
+                animalVmList = _contexto.SqlBd.Query<AnimalVM>(query +"and "+filtroRefinado+" = '"+busca+"'",
+                    new {id = usuarioId,campo=filtroRefinado,seach=busca})
+                    .ToList();
+            }
+            else if (!string.IsNullOrEmpty(filtro))
+            {
+                animalVmList = _contexto.SqlBd.Query<AnimalVM>(query + " order by " + filtro,
+                    new { id = usuarioId })
+                    .ToList();
+            }
+            foreach (var animal in animalVmList)
+            {
+                animal.NomePropriedade = _contexto.SqlBd.Query<string>("select nomePropriedade from propriedade,animal where animal.PropriedadeId = @prop and propriedade.Id = @prop ",
+                new { prop = animal.PropriedadeId }).FirstOrDefault();
+            }
+            return animalVmList;
         }
 
         public AnimalVM EditarAnimal(string brincoId, string usuarioId)
@@ -60,6 +83,39 @@ namespace ControleRural.Aplicacao
             return retornaVM(animalBd);
         }
 
+        public IEnumerable<PropriedadeViewModel> MinhasPropriedades(string usuarioId)
+        {
+            return
+                _contexto.SqlBd.Query<PropriedadeViewModel>(
+                    "select id,nomePropriedade from propriedade where UsuarioId = @uId", new {uId = usuarioId}).ToList();
+        }
+
+        public void RegistrarAtividade(RegistroAnimal registro)
+        {
+            _contexto.SqlBd.Query(
+                "insert into registroanimal (Id,IdAnimal,UsuarioId,Natureza,Data,Valor) values (@id,@a,@u,@n,@d,@v)",
+                new
+                {
+                    id = registro.ID,
+                    a = registro.IdAnimal,
+                    u = registro.UsuarioId,
+                    n = registro.Natureza,
+                    d = registro.Data,
+                    v = registro.Valor
+                });
+
+            var animalVm = new AnimalVM()
+            {
+                IdUsuario = registro.UsuarioId,
+                NumeroBrinco = registro.IdAnimal,
+                Aquisicao = registro.Data,
+                Categoria = registro.Categoria
+            };
+            if (registro.Natureza=="Compra")
+            {
+                Construtor.AnimalApp().Save(animalVm,registro.UsuarioId);
+            }
+        } 
         static private List<string> carregaVacinas(string vacinas)
         {
             return string.IsNullOrEmpty(vacinas) ? new List<string>() : vacinas.Split(',').ToList();

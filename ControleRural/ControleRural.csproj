@@ -189,6 +189,7 @@
     <Compile Include="Models\Animal.cs" />
     <Compile Include="Models\Pessoa.cs" />
     <Compile Include="Models\Propriedade.cs" />
+    <Compile Include="Models\RegistroAnimal.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Vacina.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -223,6 +224,9 @@
     <Content Include="Views\Painel\RegistrarVacina.cshtml" />
     <Content Include="Views\Painel\EstoqueVacinas.cshtml" />
     <Content Include="Views\Painel\EditarVacina.cshtml" />
+    <Content Include="Views\Painel\Fornecedores.cshtml" />
+    <Content Include="Views\Painel\DetalheFornecedor.cshtml" />
+    <Content Include="Views\Painel\RegistrarCompra.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

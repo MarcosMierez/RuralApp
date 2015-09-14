@@ -9,7 +9,12 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+        <div class="form-group">
+            <label class="control-label col-md-2">Propriedade</label>
+            <div class="col-md-10">
+                @Html.DropDownList("PropriedadeId", (SelectList)@ViewBag.propriedades, new { @class = "form-control" })
+            </div>
+        </div>
         <div class="form-group">
 
             <label class="control-label col-md-2">Foto</label>

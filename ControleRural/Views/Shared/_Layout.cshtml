@@ -12,7 +12,18 @@
     <div class="nav nav-tabs navbar-fixed-top" style="background-color: #828af2; padding-top: 50px;padding-right: 10px">
         <div class="">
             <div class="navbar-header">
-                <a class="navbar-brand" href="@Url.Action("Index", "Home")" style="color: #1c720f">Controle Agropecuario</a>
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="navbar-brand" href="@Url.Action("Index", "Painel")" style="color: #1c720f">Controle Agropecuario</a>
+
+                    }
+                    else
+                    {
+                        <a class="navbar-brand" href="@Url.Action("Index", "Home")" style="color: #1c720f">Controle Agropecuario</a>
+
+                    }
+}
             </div>
             <ul class="nav navbar-nav navbar-right" id="options">
                 @{
@@ -42,10 +53,8 @@
         <hr />
 
     </div>
-    <footer style="position:absolute;
-	bottom:0;
-	width:100%">
-        <p style="text-align: center">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    <footer>
+        <p style="text-align: center">&copy; @DateTime.Now.Year - Controle Agropecuário</p>
     </footer>
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>

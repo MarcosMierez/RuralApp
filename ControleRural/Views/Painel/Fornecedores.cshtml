@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ControleRural.Areas.Cadastramento.Models.PessoaVM>
+
+@{
+    ViewBag.Title = "Fornecedores";
+}
+
+<h2>Fornecedores</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Apelido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cnpj)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InscEstadual)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Cpf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @Html.Hidden(item.Id)
+            <td>
+                @Html.DisplayFor(modelItem => item.Apelido)
+            </td>
+            @if (item.PessoaJf == "j")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InscEstadual)
+                </td>
+                <td>Pessoa Juridica</td>
+            }
+            else
+            {
+                <td>Pessoa Fisica</td>
+                <td>Pessoa Fisica</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cpf)
+                </td>
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereco)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a href="@Url.Action("DetalheFornecedor", "Painel", new {id = @item.Id})" class="btn btn-success">Detalhe</a>
+            </td>
+        </tr>
+    }
+
+</table>

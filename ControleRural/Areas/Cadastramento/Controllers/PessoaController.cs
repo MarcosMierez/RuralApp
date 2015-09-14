@@ -14,7 +14,7 @@ namespace ControleRural.Areas.Cadastramento.Controllers
         [Authorize(Roles = "Adiministrador")]
         public ActionResult Index()
         {
-            return View(Construtor.PessoaApp().GetAll().ToList());
+            return View();
         }
 
         public ActionResult Cadastro()
@@ -34,14 +34,6 @@ namespace ControleRural.Areas.Cadastramento.Controllers
 
         public ActionResult Update(string id)
         {
-            if (id!=null)
-            {
-              var pessoa = Construtor.PessoaApp().GetById(id);
-                if (pessoa.Apelido!=null)
-                {
-                    return View(pessoa);
-                }
-            }
             return RedirectToAction("Index");
         }
 

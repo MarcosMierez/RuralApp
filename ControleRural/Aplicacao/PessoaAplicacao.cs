@@ -21,14 +21,14 @@ namespace ControleRural.Aplicacao
             pRepo.Save(entidade,id);
         }
 
-        public PessoaVM GetById(string id)
+        public PessoaVM GetById(string id,string usuarioId)
         {
-          return  pRepo.GetById(id);
+          return  pRepo.GetById(id,usuarioId);
         }
 
-        public IEnumerable<PessoaVM> GetAll()
+        public IEnumerable<PessoaVM> GetAll(string usuarioId)
         {
-            return pRepo.GetAll();
+            return pRepo.GetAll(usuarioId);
         }
 
         public void Update(PessoaVM entidade)

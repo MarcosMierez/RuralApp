@@ -9,7 +9,19 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+        <div class="form-group">
+            <label class="control-label col-md-2">Propriedade</label>
+            <div class="col-md-10">
+                @Html.DropDownList("PropriedadeId", (SelectList)@ViewBag.propriedades, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Aquisicao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" name="Aquisicao" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Aquisicao, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.NomeAnimal, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -150,7 +162,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Editar" class="btn btn-success" />
+                <input type="submit" value="Registrar" class="btn btn-success" />
             </div>
         </div>
     </div>

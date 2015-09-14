@@ -3,13 +3,54 @@
 
 <h2>Criações</h2>
 <p>@Model.Count() animais registrados</p>
+<div class="form-group">
+    <label class="control-label col-md-2">Ordenar por</label>
+    <div class="col-md-8">
+        <form action="" method="POST">
+            <select class="form-control" name="filtro" style="float: left">
+                <option value="NomeAnimal">Nome</option>
+                <option value="NumeroBrinco">Numero do Brinco</option>
+                <option value="Aptidao">Aptidão</option>
+                <option value="Raca">Raça</option>
+            </select>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success">Ordenar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<hr />
+    <div class="col-md-12">
+        <form action="" method="POST">
+            <input type="text" class="form-control" placeholder="Digite sua busca aqui" name="busca" style="float: left">
+            <label class="control-label col-md-2" style="padding-top: 10px" >Procurar por</label>
+            <div class="col-md-4">
+                <select name="filtroRefinado" class="form-control">
+                    <option value="Todos">Todos</option>
+                    <option value="NomeAnimal">Nome</option>
+                    <option value="Raca">Raça</option>
+                    <option value="Aptidao">Aptidao</option>
+                    <option value="DataNascimento">Nascimento</option>
+                    <option value="Categoria">Categoria</option>
+                    <option value="Vacina">Vacinas</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-warning">Buscar</button>
+            </div>
+
+        </form>
+    </div>
+<br />
+<hr />
 <table class="table">
     <tr>
         <th>
             Nome
         </th>
         <th>
-           Numero do Brinco
+            Numero do Brinco
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Sexo)
@@ -20,31 +61,52 @@
         <th>
             @Html.DisplayNameFor(model => model.Aptidao)
         </th>
-
+        <th>
+            Propriedade
+        </th>
+        <th>
+            Aquisição
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomeAnimal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroBrinco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sexo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Raca)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Aptidao)
-        </td>
-        <td>
-            <a href="@Url.Action("Detalhe","Painel",new{id = @item.NumeroBrinco})">Editar</a>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeAnimal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroBrinco)
+            </td>
+            @{
+        if (item.Sexo == "f")
+        {
+            <td>Fêmea</td>
+        }
+        else
+        {
+            <td>Macho</td>
+
+        }
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Raca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aptidao)
+            </td>
+            <td>
+                @item.NomePropriedade
+            </td>
+            <td>
+                @item.Aquisicao.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                <a href="@Url.Action("Detalhe","Painel",new{id = @item.NumeroBrinco})">Editar</a>
+            </td>
+        </tr>
+    }
 
 </table>
